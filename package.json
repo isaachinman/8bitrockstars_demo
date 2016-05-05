@@ -16,6 +16,7 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-lite": "0.0.21",
+    "reset-css": "^2.0.2011012603",
     "uglifyify": "^3.0.1",
     "uglifyjs": "^2.4.10"
   },
