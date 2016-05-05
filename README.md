@@ -3,7 +3,7 @@
 This is a self contained frontend application which runs via a Node/Express server and renders views with React. It's just a demo, there is no database. The project is, however, fully ready to interact with and consume data from an API.
 
 To run:
-`npm i`, `npm build`, `npm start`
+`npm i`, `npm run build`, `npm start`
 
 The application runs on port 3000.
 
