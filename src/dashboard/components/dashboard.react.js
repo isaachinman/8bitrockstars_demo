@@ -32,6 +32,7 @@ module.exports = React.createClass({
     // Reset the user form
     e.target.reset()
 
+    // Set new state
     this.setState({
       users: newUsers,
       userModalIsOpen: false
@@ -52,6 +53,7 @@ module.exports = React.createClass({
     // Reset the group form
     e.target.reset()
 
+    // Set new state
     this.setState({
       groups: newGroups,
       groupModalIsOpen: false
@@ -60,19 +62,21 @@ module.exports = React.createClass({
   },
   render: function() {
 
+    // This is the boolean that controls the visibility of the add user modal
     var userModalIsVisible = {display:'none'}
     if (this.state.userModalIsOpen) {
       userModalIsVisible.display = 'block'
     }
 
+    // This is the boolean that controls the visibility of the add group modal
     var groupModalIsVisible = {display:'none'}
     if (this.state.groupModalIsOpen) {
       groupModalIsVisible.display = 'block'
     }
 
+    // Compile users
     var users = []
     for (var i=0; i<this.state.users.length; i++) {
-      console.log(this.state.users[i])
       users.push(
         <User
           firstName={this.state.users[i].firstName}
@@ -81,6 +85,22 @@ module.exports = React.createClass({
           groups={this.state.groups}
         />
       )
+    }
+
+    // Compile groups
+    var groups = null
+    if (this.state.groups.length > 0) {
+      groups = 'Groups: '
+
+      // For each group, add the name to a list
+      for (var i=0; i<this.state.groups.length; i++) {
+        groups += this.state.groups[i].props.name
+
+        // As long as this group isn't the last, add a comma after
+        if (i !== (this.state.groups.length -1)) {
+          groups += ', '
+        }
+      }
     }
 
     return (
@@ -96,7 +116,7 @@ module.exports = React.createClass({
           {users}
 
           <div className='group-container'>
-            {this.state.groups}
+            {groups}
           </div>
 
           <div className='create-group' onClick={this.openGroupModal}>Create group</div>
@@ -110,8 +130,8 @@ module.exports = React.createClass({
             <div className='title'>Add a new user</div>
             <div className='content'>
               <form className='add-new-user' onSubmit={this.addUser}>
-                <input type='text' name='first-name' required='required' placeholder="First name" required='required' />
-                <input type='text' name='last-name' required='required' placeholder="Last name" required='required' />
+                <input type='text' name='first-name' required='required' length='30' placeholder="First name" required='required' />
+                <input type='text' name='last-name' required='required' length='30' placeholder="Last name" required='required' />
                 <input type='date' name='birthday' required='required' placeholder="Date of birth" required='required' />
                 <button type='submit' className='btn'>Create user</button>
               </form>
@@ -126,7 +146,7 @@ module.exports = React.createClass({
             <div className='title'>Add a new group</div>
             <div className='content'>
               <form className='add-new-user' onSubmit={this.addGroup}>
-                <input type='text' name='name' required='required' placeholder="Group name" required='required' />
+                <input type='text' name='name' required='required' placeholder="Group name" length='30' required='required' />
                 <button type='submit' className='btn'>Create group</button>
               </form>
             </div>
